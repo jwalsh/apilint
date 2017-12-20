@@ -17,7 +17,7 @@ function smartSplit(input) {
   2. lower-camel-case (e.g. `myObject`)
   3. snake-case (e.g. `my_object`)
   4. dash-case (e.g. `my-object`)
-  5. spring-data-rest (e.g. `myObject` or `_links`)
+  5. hal (e.g. `myObject` or `_links`)
 
   Note: Consecutive capital letters are not round-trip safe. E.g. converting
   the string `APITest` to dash-case and back to CamelCase would result in
@@ -32,12 +32,16 @@ function recase(input, style) {
   const pieces = smartSplit(input);
   let expected = '';
 
-  if (style === 'lower-camel-case' || style === 'spring-data-rest' || style === 'camel-case') {
+  if (style === 'lower-camel-case' || style === 'hal' || style === 'camel-case') {
     expected = pieces.map((piece, i) => {
       const direction = (i > 0 || style === 'camel-case') ? 'Upper' : 'Lower';
       if (piece.match(/^[A-Z]+$/)) {
         // All capitals, so treat them as one single entity.
         return piece[`to${direction}Case`]();
+      }
+      if (style === 'hal' && i == 0 && /links|embedded/.test(piece)) {
+        // metadata https://apigility.org/documentation/api-primer/halprimer
+        return '_' + piece;
       }
       // Capitalize each word, except first word for lower camel.
       return piece[0][`to${direction}Case`]() + piece.slice(1).toLowerCase();
