@@ -46,6 +46,38 @@ describe('Recasing', () => {
     });
   });
 
+  context('Spring Data REST', () => {
+    it('should work from CamelCase', () => {
+      expect(recase('CamelCase', 'spring-data-rest'))
+        .to.equal('camelCase');
+    });
+
+    it('should work from snake-case', () => {
+      expect(recase('snake_case', 'spring-data-rest'))
+        .to.equal('snakeCase');
+    });
+
+    it('should handle consecutive capitals', () => {
+      expect(recase('APITest', 'spring-data-rest'))
+        .to.equal('apiTest');
+    });
+
+    it('should pass through', () => {
+      expect(recase('lowerCamelCase', 'spring-data-rest'))
+        .to.equal('lowerCamelCase');
+    });
+
+    it('should accept links', () => {
+      expect(recase('_links', 'spring-data-rest'))
+        .to.equal('_links');
+    });
+
+    it('should accept embedded resources', () => {
+      expect(recase('_embedded', 'spring-data-rest'))
+        .to.equal('_embedded');
+    });
+  });
+
   context('Snake case', () => {
     it('should work from CamelCase', () => {
       expect(recase('CamelCase', 'snake-case'))

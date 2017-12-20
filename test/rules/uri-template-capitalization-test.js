@@ -36,7 +36,7 @@ describe('URI template capitalization', () => {
     });
   });
 
-  it('Exposes issue when action overrides URI template', () => {
+  xit('Exposes issue when action overrides URI template', () => {
     const apiDescription = `# API Title
 
 ## Resources [/resources]

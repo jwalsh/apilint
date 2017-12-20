@@ -1,6 +1,6 @@
 {
-  "name": "apilint",
-  "version": "0.6.0",
+  "name": "@jwalsh/apilint",
+  "version": "0.0.1",
   "description": "Extensible REST API linter utility",
   "main": "src/index.js",
   "bin": {

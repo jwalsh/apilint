@@ -85,6 +85,14 @@ The `load` directive should be a path to a directory that contains Javascript fi
 
 The `config` directive is an object where the keys are the rule name and the value is an object with configuration for the rule. As a shorthand, the value may also be a string severity, e.g. `error` which would be shorthand for `{"severity": "error"}`. See the documentation for individual rules for a list of things which can be configured, such as the capitalization `style` for URI parameters in the example above.
 
+### Capitilization 
+
+1. camel-case (e.g. `MyObject`)
+2. lower-camel-case (e.g. `myObject`)
+3. snake-case (e.g. `my_object`)
+4. dash-case (e.g. `my-object`)
+5. spring-data-rest (e.g. `myObject`)
+
 ### Writing Custom Rules
 
 Custom rules are just a simple function that takes in a parsed API, the associated `ApiLinter` instance, and the rule's configuration. The rule function is expected to return an iterable of issues. For example, to write a basic rule which requires the API to have a name:
